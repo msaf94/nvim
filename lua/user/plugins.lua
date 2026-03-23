@@ -23,17 +23,31 @@ require("lazy").setup({
     },
     opts = {
       default_file_explorer = true,
-      view_options = { show_hidden = true },
+      view_options = { show_hidden = true, is_always_hidden = function(name, _)
+      -- Не скрывать node_modules
+      return false  -- показывать всё
+    end, },
     },
   },
 {
   "nvim-telescope/telescope.nvim",
-  dependencies = { "nvim-lua/plenary.nvim" },
+  dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-live-grep-args.nvim" },
   keys = {
     { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find files" },
-    { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Find text" },
+    { "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = "Find text" },
     { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Find buffers" },
   },
+    config = function()
+    local telescope = require("telescope")
+
+    -- first setup telescope
+    telescope.setup({
+        -- your config
+    })
+
+    -- then load the extension
+    telescope.load_extension("live_grep_args")
+  end
 },
 {
   "akinsho/bufferline.nvim",
@@ -57,14 +71,6 @@ require("lazy").setup({
       show_close_icon = true,
     },
   },
-},
-{"shortcuts/no-neck-pain.nvim", version = "*", opts = {
-    width = 120,  -- твоя любимая ширина
-    autocmds = {
-      enableOnVimEnter = true,
-skipEnteringNoNeckPainBuffer = true
-    },
-  diagnostics = "nvim_lsp"},
 },
 {
   "hrsh7th/nvim-cmp",
@@ -111,37 +117,46 @@ skipEnteringNoNeckPainBuffer = true
   end,
 },
 {
-  "stevearc/conform.nvim",
-  opts = {
-    -- Определяем, какой форматтер для каких типов файлов использовать
-    formatters_by_ft = {
-      -- Biome для всех твоих файлов
-      javascript = { "biome" },
-      javascriptreact = { "biome" },
-      typescript = { "biome" },
-      typescriptreact = { "biome" },
-      json = { "biome" },
-      jsonc = { "biome" },
-      css = { "biome" },
-      html = { "biome" },
-    },
-    -- Опции для format_on_save (если хочешь автоформат при сохранении)
-    format_on_save = {
-      -- Время ожидания форматирования в мс
-      timeout_ms = 500,
-      -- Если форматтер не найден, пробуем LSP
-      lsp_format = "fallback",
-    },
-  },
-  -- Добавляем удобную команду для ручного форматирования
-  keys = {
-    {
-      "<leader>f",
-      function()
-        require("conform").format({ async = true })
-      end,
-      desc = "Format with conform",
-    },
-  },
+  "akinsho/toggleterm.nvim",
+  config = function()
+    require("toggleterm").setup({
+      size = 15,
+      open_mapping = "<leader>tt",  -- тоггл
+      size = 20,  -- или function(term) return 20 end
+      open_mapping = "<leader>tt",  -- основной терминал
+      direction = "float",  -- плавающий по умолчанию
+      float_opts = {
+        border = "curved",  -- границы: "single", "double", "shadow", "curved"
+        width = 120,        -- ширина в символах
+        height = 30,        -- высота в символах
+        winblend = 3,       -- прозрачность (0-100)
+        highlights = {
+          border = "Normal",
+          background = "Normal",
+        },
+      },
+    })
+  end
+},
+{
+  "folke/which-key.nvim",
+  config = function()
+    require("which-key").setup()
+    
+    -- Показать все маппинги
+    vim.keymap.set("n", "<leader>wk", function()
+      require("which-key").show({ global = false })
+    end, { desc = "Show keymaps" })
+  end
+},{
+  "rmagatti/auto-session",
+  lazy = false, -- Важно! Плагин должен загружаться сразу
+  config = function()
+    -- Настройка плагина
+    require("auto-session").setup({
+      -- suppress_dirs = { "~/", "~/Downloads", "/" }, -- Можно исключить папки, где не нужно сохранять сессию
+      log_level = "error", -- Уровень логирования (чтобы не засорять вывод)
+    })
+  end,
 }
 })
