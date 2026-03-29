@@ -158,5 +158,55 @@ require("lazy").setup({
       log_level = "error", -- Уровень логирования (чтобы не засорять вывод)
     })
   end,
+},
+{
+  "lewis6991/gitsigns.nvim",
+  event = "VeryLazy",
+  config = function()
+    require("gitsigns").setup({
+        current_line_blame = true,
+    })
+  end,
+},
+{ "malewicz1337/oil-git.nvim", dependencies = { "stevearc/oil.nvim" } },
+{
+    "keaising/im-select.nvim",
+    config = function()
+        require("im_select").setup({})
+    end,
+},
+{
+ "y3owk1n/time-machine.nvim",
+ version = "*", -- remove this if you want to use the `main` branch
+  keys = {
+    { "<leader>lh", "<cmd>TimeMachineToggle<CR>", desc = "Toggle time machine" },
+  },
+ opts = {
+
+ }
+},
+{
+  "kylechui/nvim-surround",
+  config = function()
+    require("nvim-surround").setup()
+  end,
+},
+{
+  "stevearc/conform.nvim",
+  opts = {
+    formatters_by_ft = {
+      -- Указываем, для каких файлов использовать biome
+      javascript = { "biome", "biome-organize-imports" },
+      typescript = { "biome", "biome-organize-imports" },
+      javascriptreact = { "biome", "biome-organize-imports" },
+      typescriptreact = { "biome", "biome-organize-imports" },
+      json = { "biome" },
+      jsonc = { "biome" },
+    },
+    format_on_save = {
+      timeout_ms = 500,
+      lsp_format = "fallback",
+    },
+  },
 }
 })
