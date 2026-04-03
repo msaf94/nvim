@@ -29,8 +29,8 @@ opt.mouse = "a" -- поддержка мыши
 opt.clipboard = "unnamedplus" -- системный буфер обмена
 opt.swapfile = false -- не создавать swap-файлы
 opt.backup = false -- не создавать backup-файлы
-opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 opt.undofile = true -- сохранять историю изменений между сессиями
+vim.opt.undodir = vim.fn.expand("~/.local/share/nvim/undo")
 
 -- Время ожидания
 opt.timeoutlen = 1000 -- время ожидания для лидер-клавиши (мс)
@@ -56,3 +56,6 @@ vim.diagnostic.config({
 		prefix = "",
 	},
 })
+
+vim.opt.langmap =
+	"ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz,Ж;:"

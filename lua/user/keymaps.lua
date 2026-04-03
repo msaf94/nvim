@@ -77,3 +77,12 @@ vim.keymap.set("n", "<leader>yr", function()
 	vim.fn.setreg("+", path)
 	print("Copied: " .. path)
 end, { desc = "Copy relative path" })
+
+vim.keymap.set("n", "<leader>fr", "<cmd>Telescope resume<CR>", { desc = "Resume last picker" })
+
+vim.keymap.set("n", "[c", function()
+	require("treesitter-context").go_to_context(vim.v.count1)
+end, { silent = true })
+
+vim.keymap.set("n", "<C-k>", "3<C-y>", { desc = "Scroll up 3 lines" })
+vim.keymap.set("n", "<C-j>", "3<C-e>", { desc = "Scroll down 3 lines" })
