@@ -5,6 +5,7 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+-- Отключаем до переезда на biome
 vim.lsp.config("biome", {
 	cmd = { "biome", "lsp-proxy" },
 	filetypes = {
@@ -60,7 +61,7 @@ vim.lsp.config("ts_ls", {
 -- Включаем только TypeScript сервер
 vim.lsp.enable({ "ts_ls" })
 
--- CSS/SCSS/LESS LSP (дополнительно к Biome)
+-- CSS/SCSS/LESS LSP
 vim.lsp.config("cssls", {
 	cmd = { "vscode-css-language-server", "--stdio" },
 	filetypes = { "css", "scss", "less" },

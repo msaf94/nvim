@@ -33,7 +33,7 @@ opt.undofile = true -- сохранять историю изменений ме
 vim.opt.undodir = vim.fn.expand("~/.local/share/nvim/undo")
 
 -- Время ожидания
-opt.timeoutlen = 1000 -- время ожидания для лидер-клавиши (мс)
+opt.timeoutlen = 500 -- время ожидания для лидер-клавиши (мс)
 opt.updatetime = 250 -- время обновления (для плагинов)
 
 -- Настройки диагностики
@@ -59,3 +59,5 @@ vim.diagnostic.config({
 
 vim.opt.langmap =
 	"ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz,Ж;:"
+
+vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#00FF00" })

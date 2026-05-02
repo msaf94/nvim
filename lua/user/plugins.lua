@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+	{ "folke/tokyonight.nvim" },
 	require("user.plugins.toggleterm"),
 	require("user.plugins.oil"),
 	require("user.plugins.telescope"),
@@ -25,8 +26,10 @@ require("lazy").setup({
 	require("user.plugins.time-machine"),
 	require("user.plugins.nvim-surround"),
 	require("user.plugins.conform"),
-	require("user.plugins.nvim-eslint"),
+	-- require("user.plugins.nvim-eslint"),
 	require("user.plugins.nvim-treesitter"),
 	require("user.plugins.nvim-treesitter-context"),
-	require("user.plugins.lazygit"),
+	require("user.plugins.codesnap"),
+	require("user.plugins.snacks"),
+	require("user.plugins.opencode"),
 })
