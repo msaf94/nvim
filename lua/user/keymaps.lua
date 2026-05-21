@@ -99,3 +99,5 @@ vim.keymap.set("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Create new buffer" 
 vim.keymap.set("n", "<leader>bF", function()
 	require("snacks").bufdelete.other()
 end, { desc = "Delete all other buffers" })
+
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
