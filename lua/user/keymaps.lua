@@ -101,3 +101,5 @@ vim.keymap.set("n", "<leader>bF", function()
 end, { desc = "Delete all other buffers" })
 
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
+
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename entry" })
