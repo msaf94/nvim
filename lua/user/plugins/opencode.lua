@@ -25,7 +25,7 @@ return {
 		},
 	},
 	config = function()
-		local opencode_cmd = "opencode --port"
+		local opencode_cmd = "opencode"
 		local snacks_terminal_opts = {
 			win = {
 				position = "right",
