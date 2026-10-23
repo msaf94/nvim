@@ -103,3 +103,5 @@ end, { desc = "Delete all other buffers" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename entry" })
+
+vim.keymap.set("n", "<leader>nh", "<cmd>Gitsigns next_hunk<CR>", { desc = "Next Git hunk" })
